@@ -69,21 +69,6 @@ namespace CompositeAreaManager
 			return usedHeight;
 		}
 
-/*		private float DoOperationElement(Rect inRect, CompositeAreaOperation op, CompositeAreaOperation parentOp, int areaID)
-		{
-			Rect buttonRect = new Rect (new Vector2 (inRect.center.x - op.opButtonSize.x, inRect.yMin), opButtonSize);
-			string text = op == null ? "0" : ((int)op.opType).ToString ();
-
-			if (Widgets.ButtonText (buttonRect, text)) {
-				List<FloatMenuOption> buttonMenuList = this.MakeOpButtonMenuList (parentOp);
-				if (parentOp == null) //Only for root node
-					foreach (var option in buttonMenuList)
-						option.action = delegate {
-						};
-			}
-							
-		}	*/
-
 		private void DoFooterContents(Rect inRect)
 		{
 			Vector2 size = Text.CalcSize ("NewCompositeArea".Translate ());
@@ -297,7 +282,10 @@ namespace CompositeAreaManager
 
 				switch (op.opType) {
 				case CompositeAreaOperationType.Area:
+					Color currentColor = GUI.color;
+					GUI.color = op.areaArg.Color;
 					Widgets.Label (inRect, op.areaArg.Label);
+					GUI.color = currentColor;
 					drawRemoveElementAction ();
 					return usedWidth;
 				case CompositeAreaOperationType.Intersect:
@@ -374,7 +362,7 @@ namespace CompositeAreaManager
 				case CompositeAreaOperationType.Union:
 					return " \u222A ";
 				case CompositeAreaOperationType.Invert:
-					return " !( ) ";
+					return " !() ";
 				}
 
 				return string.Empty;
