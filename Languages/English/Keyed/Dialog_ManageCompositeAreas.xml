@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<ManageCompositeAreas>Manage Composite Areas</ManageCompositeAreas>
+	<Compose>Compose</Compose>
+	<NewCompositeArea>New Composite Area</NewCompositeAreas>
+	<RemoveCompositeArea>Remove Composite Area</RemoveCompositeArea>
+	<Union>Union</Union>
+	<Intersect>Intersect</Intersect>
+	<Invert>Invert</Invert>
+	<Remove>Remove</Remove>
+
+</LanguageData>

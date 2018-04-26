@@ -1,0 +1,14 @@
+﻿<Properties StartupItem="CompositeAreaManager.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Source/HarmonyInstance.cs">
+    <Files>
+      <File FileName="Source/DerivedArea.cs" Line="18" Column="18" NotebookId="1" />
+      <File FileName="Source/DerivedAreaManager.cs" Line="41" Column="41" NotebookId="1" />
+      <File FileName="Source/HarmonyInstance.cs" Line="3" Column="3" NotebookId="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
