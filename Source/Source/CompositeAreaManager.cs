@@ -9,11 +9,9 @@ namespace CompositeAreaManager
 	public class CompositeAreaManager : MapComponent
 	{
 		//List Area IDs as the Dictionary cannot be exposed if the Key is abstract ...
-		private Dictionary<int, CompositeAreaOperation> compositeAreas;
-		private List<int> compositeAreasKeyHelper;
-		private List<CompositeAreaOperation> compositeAreasValueHelper;
+		private List<CompositeArea> compositeAreas;
 
-		public Dictionary<int, CompositeAreaOperation> AllCompositeAreas {
+		public List<CompositeArea> AllCompositeAreas {
 			get {
 				return this.compositeAreas;
 			}
@@ -25,28 +23,21 @@ namespace CompositeAreaManager
 			}
 		}
 
-		public List<Area> AllValidAdditionalAreaReferences(int areaID)
-		{
-			HashSet<Area> alreadyIncluded = new HashSet<Area> ();
-			alreadyIncluded.AddRange (compositeAreas [areaID].AllAreaReferences.ToList());
-			int lastCount = 0;
-			while (lastCount < alreadyIncluded.Count) {
-				lastCount = alreadyIncluded.Count;
-				for(int i = alreadyIncluded.Count; --i >= 0; )
-					if(compositeAreas.TryGetValue(alreadyIncluded.ElementAt(i).ID, out var op))
-						alreadyIncluded.AddRange(op.AllAreaReferences.ToList());
+		public IEnumerable<Area> AllPotentialNewCompositeAreas {
+			get {
+				return map.areaManager.AllAreas.Where (a => a.AssignableAsAllowed(AllowedAreaMode.Any) 
+					&& !compositeAreas.Any (ca => ca.area == a));
 			}
-			return AllCompositableAreas.Where (a => !alreadyIncluded.Contains (a)).ToList ();
 		}
 
 		public CompositeAreaManager (Map map) : base(map)
 		{
-			this.compositeAreas = new Dictionary<int, CompositeAreaOperation> ();
+			this.compositeAreas = new List<CompositeArea> ();
 		}
 
-		private Area AreaForID(int id)
+		public CompositeArea CompositeAreaForOrNull(Area area)
 		{
-			return map.areaManager.AllAreas.FirstOrDefault (a => a.ID == id);
+			return this.compositeAreas.FirstOrDefault (a => a.area == area);
 		}
 
 		public void LaunchDialog_ManageCompositeAreas()
@@ -57,24 +48,13 @@ namespace CompositeAreaManager
 
 		public void RecalculateAll()
 		{
-			foreach (int areaID in compositeAreas.Keys)
-				Recalculate (areaID);
-		}
-
-		public void Recalculate(int areaID)
-		{
-			if (!compositeAreas [areaID].IsValid)
-				return;
-
-			Area area = AreaForID (areaID);
-			foreach (IntVec3 cell in area.Map.AllCells)
-				area [cell] = compositeAreas [areaID] [cell];
+			foreach (var compositeArea in compositeAreas)
+				compositeArea.Recalculate ();
 		}
 
 		public override void ExposeData()
 		{
-			Scribe_Collections.Look<int, CompositeAreaOperation> (ref this.compositeAreas, "CompositeAreas", 
-				LookMode.Value, LookMode.Deep, ref this.compositeAreasKeyHelper, ref this.compositeAreasValueHelper);
+			Scribe_Collections.Look<CompositeArea> (ref this.compositeAreas, "CompositeAreas");
 		}
 
 		public override void MapComponentTick()

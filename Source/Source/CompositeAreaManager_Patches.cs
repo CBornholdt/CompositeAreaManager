@@ -42,7 +42,7 @@ namespace CompositeAreaManager
 					yield return codes [i + 2];	//get_width()
 					yield return codes [i + 3];
 					yield return codes [i + 4];
-					yield return codes [i + 5]; //set_columnWidth
+					yield return codes [i + 5]; //Standard_Listing.set_columnWidth, next patch must be after this instruction
 					yield return new CodeInstruction (OpCodes.Ldarg_0);	//Leave Dialog_ManageAreas on stack
 					yield return new CodeInstruction (OpCodes.Dup); //Leave Dialog_ManageAreas, Dialog_ManageAreas on stack
 					yield return new CodeInstruction (OpCodes.Ldfld, mapField);	//Consume 1, Leave Map, Dialog_ManageAreas on stack

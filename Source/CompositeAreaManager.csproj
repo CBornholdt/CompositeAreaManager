@@ -45,8 +45,10 @@
   <ItemGroup>
     <Compile Include="Source\HarmonyPatches.cs" />
     <Compile Include="Source\CompositeAreaManager.cs" />
-    <Compile Include="Source\CompositeAreaOperation.cs" />
     <Compile Include="Source\CompositeAreaManager_Patches.cs" />
     <Compile Include="Source\Dialog_ManageCompositeAreas.cs" />
+    <Compile Include="Source\CompositeArea.cs" />
+    <Compile Include="Source\CompositeAreaOp.cs" />
+    <Compile Include="Source\CompositeAreaOp_DisplayNode.cs" />
   </ItemGroup>
 </Project>

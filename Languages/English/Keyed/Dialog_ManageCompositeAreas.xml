@@ -9,4 +9,7 @@
 	<Invert>Invert</Invert>
 	<Remove>Remove</Remove>
 	<Area>Area</Area>
+	<AreaReference>Area Reference</AreaReference>
+	<RoomRole>Room Type</RoomRole>
+	<GrowingZone>Growing Zone</GrowingZone>
 </LanguageData>

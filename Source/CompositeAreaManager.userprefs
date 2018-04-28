@@ -1,10 +1,14 @@
 ﻿<Properties StartupItem="CompositeAreaManager.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Source/Dialog_ManageCompositeAreas.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Source/CompositeAreaOp_DisplayNode.cs">
     <Files>
-      <File FileName="Source/Dialog_ManageCompositeAreas.cs" Line="40" Column="40" NotebookId="1" />
-      <File FileName="Source/CompositeAreaOperation.cs" Line="43" Column="43" NotebookId="1" />
-      <File FileName="Source/CompositeAreaManager.cs" Line="8" Column="8" NotebookId="1" />
+      <File FileName="Source/Dialog_ManageCompositeAreas.cs" Line="35" Column="35" NotebookId="1" />
+      <File FileName="Source/CompositeAreaOp.cs" Line="26" Column="26" NotebookId="1" />
+      <File FileName="Source/CompositeAreaOp_DisplayNode.cs" Line="4" Column="4" NotebookId="1" />
+      <File FileName="Source/CompositeArea.cs" Line="50" Column="50" NotebookId="1" />
+      <File FileName="Source/CompositeAreaManager_Patches.cs" Line="53" Column="53" NotebookId="1" />
+      <File FileName="Source/CompositeAreaManager.cs" Line="23" Column="23" NotebookId="1" />
+      <File FileName="Source/HarmonyPatches.cs" Line="5" Column="5" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
