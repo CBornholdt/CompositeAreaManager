@@ -262,17 +262,11 @@ namespace CompositeAreaManager
 		public IEnumerable<FloatMenuOption> MakeOpButtonMenuOptions()
 		{
 			yield return new FloatMenuOption ("Union".Translate (), () => ReplaceOperationWith (
-				new CompositeAreaOp_Union () {
-					arg1 = new CompositeAreaOp_Empty (),
-					arg2 = new CompositeAreaOp_Empty ()
-				}));
+				new CompositeAreaOp_Union ()));
 			yield return new FloatMenuOption ("Intersect".Translate (), () => ReplaceOperationWith (
-				new CompositeAreaOp_Intersect () {
-					arg1 = new CompositeAreaOp_Empty (),
-					arg2 = new CompositeAreaOp_Empty ()
-				}));
+				new CompositeAreaOp_Intersect ()));
 			yield return new FloatMenuOption ("Invert".Translate (), () => ReplaceOperationWith (
-				new CompositeAreaOp_Invert () { arg1 = new CompositeAreaOp_Empty () }));
+				new CompositeAreaOp_Invert ()));
 				
 			List<FloatMenuOption> mapReferenceList = new List<FloatMenuOption> ();
 			foreach (Area area in parentArea.AllValidAdditionalAreaReferences)

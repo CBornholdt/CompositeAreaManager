@@ -48,7 +48,16 @@
     <Compile Include="Source\CompositeAreaManager_Patches.cs" />
     <Compile Include="Source\Dialog_ManageCompositeAreas.cs" />
     <Compile Include="Source\CompositeArea.cs" />
-    <Compile Include="Source\CompositeAreaOp.cs" />
     <Compile Include="Source\CompositeAreaOp_DisplayNode.cs" />
+    <Compile Include="Source\CompositeAreaOp\CompositeAreaOp.cs" />
+    <Compile Include="Source\CompositeAreaOp\CompositeAreaOP_Union.cs" />
+    <Compile Include="Source\CompositeAreaOp\CompositeAreaOp_Intersect.cs" />
+    <Compile Include="Source\CompositeAreaOp\CompositeAreaOp_Invert.cs" />
+    <Compile Include="Source\CompositeAreaOp\CompositeAreaOp_RoomRole.cs" />
+    <Compile Include="Source\CompositeAreaOp\CompositeAreaOp_AreaRef.cs" />
+    <Compile Include="Source\CompositeAreaOp\CompositeAreaOP_GrowingZone.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Source\CompositeAreaOp\" />
   </ItemGroup>
 </Project>

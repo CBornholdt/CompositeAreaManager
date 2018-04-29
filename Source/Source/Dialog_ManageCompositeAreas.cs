@@ -102,7 +102,7 @@ namespace CompositeAreaManager
 
 		public override void DoWindowContents(Rect inRect)
 		{
-			Rect scrollRect = new Rect (inRect.xMin + 2, inRect.yMin + 2, inRect.width - 4, inRect.height - footerHeight - 4);
+			Rect scrollRect = new Rect (inRect.xMin + CellSpacing, inRect.yMin + CellSpacing, inRect.width - 2*CellSpacing, inRect.height - footerHeight - 2*CellSpacing);
 			Rect scrollViewRect = new Rect (0, 0, scrollRect.width - 2 * GUI.skin.verticalScrollbar.fixedWidth, this.viewHeight);
 			Widgets.BeginScrollView (scrollRect, ref this.scrollPosition, scrollViewRect, true);
 
@@ -124,10 +124,6 @@ namespace CompositeAreaManager
 		{
 			map.GetComponent<CompositeAreaManager> ().RecalculateAll();
 		}
-
-
-		//Node for combined operations ... really terrible name I know
-
 	}
 }
 
