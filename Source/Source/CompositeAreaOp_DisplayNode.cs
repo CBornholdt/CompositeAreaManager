@@ -282,6 +282,8 @@ namespace CompositeAreaManager
 				Find.WindowStack.Add (new FloatMenu (mapReferenceList)));
 
 			List<FloatMenuOption> roomRoleTypeList = new List<FloatMenuOption> ();
+			roomRoleTypeList.Add (new FloatMenuOption ("AnyRoom".Translate (), () => ReplaceOperationWith (
+				new CompositeAreaOp_AnyRoomType (dialog.Map))));
 			foreach (RoomRoleDef roomRole in DefDatabase<RoomRoleDef>.AllDefsListForReading)
 				roomRoleTypeList.Add (new FloatMenuOption (roomRole.LabelCap, 
 					() => ReplaceOperationWith (new CompositeAreaOp_RoomRoleType (dialog.Map, roomRole))));

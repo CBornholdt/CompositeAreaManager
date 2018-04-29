@@ -30,7 +30,7 @@ namespace CompositeAreaManager
 			List<CodeInstruction> codes = instructions.ToList ();
 
 			yield return new CodeInstruction (OpCodes.Ldarg_1);	//Load Rect onto stack
-			yield return new CodeInstruction (OpCodes.Call, scrollViewHelperBegin);	//Consume 0
+			yield return new CodeInstruction (OpCodes.Call, scrollViewHelperBegin);	//Consume 1, leave 1
 			yield return new CodeInstruction (OpCodes.Starg_S, 1);	//Consume 1
 
 			for (int i = 0; i < codes.Count; i++) {

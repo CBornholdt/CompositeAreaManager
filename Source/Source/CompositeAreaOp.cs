@@ -197,6 +197,46 @@ namespace CompositeAreaManager
 		}
 	}
 
+	public class CompositeAreaOp_AnyRoomType : CompositeAreaOp
+	{
+		public Map map = null;
+		Region[] regionGrid = null;
+
+		public CompositeAreaOp_AnyRoomType(Map map)
+		{
+			this.map = map;
+		}
+
+		public override void ExposeData()
+		{
+			base.ExposeData ();
+			Scribe_References.Look<Map> (ref this.map, "Map");
+		}
+
+		public override void PreRecalculate()
+		{
+			this.regionGrid = map.regionGrid.DirectGrid;
+		}
+
+		public override void PostRecalculate()
+		{
+			this.regionGrid = null;
+		}
+
+		public override bool this [int cellIndex] { 
+			get {
+				return (regionGrid[cellIndex]?.Room?.Role ?? RoomRoleDefOf.None) != RoomRoleDefOf.None;
+			}
+		}
+		public override bool IsValid { 
+			get {
+				return map != null;
+			}
+		}
+		public override string Label {
+			get { return "[" + "AnyRoom".Translate() + "]"; }
+		}
+	}
 
 	public class CompositeAreaOp_GrowingZone : CompositeAreaOp
 	{

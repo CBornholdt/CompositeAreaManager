@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Verse;
+using RimWorld;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -73,28 +74,30 @@ namespace CompositeAreaManager
 
 		private void DoFooterContents(Rect inRect)
 		{
-			Vector2 size = Text.CalcSize ("NewCompositeArea".Translate ());
-			Rect rect = new Rect (0, 0, size.x + 12, size.y + 6);
-			CompositeAreaManager cAM = this.map.GetComponent<CompositeAreaManager> ();
-			GUI.BeginGroup (inRect);
+			Listing_Standard listing = new Listing_Standard ();
+			listing.Begin (inRect);
+			listing.ColumnWidth = inRect.width / 2;
+
 			//Must have at least 1 non composite area ...
-			if (Widgets.ButtonText (rect, "NewCompositeArea".Translate (), true, false, cAM.AllCompositeAreas.Count () < cAM.AllCompositableAreas.Count () - 1)) {
+			CompositeAreaManager cAM = map.GetComponent<CompositeAreaManager> ();
+			if (listing.ButtonText ("NewCompositeArea".Translate ()) && cAM.AllCompositeAreas.Count () < cAM.AllCompositableAreas.Count () - 1) {
 				List<FloatMenuOption> newAreaList = new List<FloatMenuOption> ();
 				foreach (Area area in cAM.AllPotentialNewCompositeAreas)
 					newAreaList.Add (new FloatMenuOption ("Compose".Translate () + ": " + area.Label, 
 						() => cAM.AllCompositeAreas.Add (new CompositeArea (area))));
 				Find.WindowStack.Add (new FloatMenu (newAreaList));
 			}
-			size = Text.CalcSize ("RemoveCompositeArea".Translate ());
-			rect = new Rect (0, rect.height + 2 * CellSpacing, size.x + 12, size.y + 6);
-			if (Widgets.ButtonText (rect, "RemoveCompositeArea".Translate (), true, false, cAM.AllCompositeAreas.Any())) {
+			if (listing.ButtonText ("RemoveCompositeArea".Translate ()) && cAM.AllCompositeAreas.Any()) {
 				List<FloatMenuOption> newAreaList = new List<FloatMenuOption> ();
 				foreach (var compositeArea in cAM.AllCompositeAreas)
 					newAreaList.Add (new FloatMenuOption ("Remove".Translate () + ": " + compositeArea.area.Label, 
 						() => cAM.AllCompositeAreas.Remove (compositeArea)));
 				Find.WindowStack.Add (new FloatMenu (newAreaList));
 			}
-			GUI.EndGroup ();
+			if (listing.ButtonText ("ManageAreas".Translate ()))
+				Find.WindowStack.Add (new Dialog_ManageAreas (map));
+
+			listing.End ();
 		}
 
 		public override void DoWindowContents(Rect inRect)
