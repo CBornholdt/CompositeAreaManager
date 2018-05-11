@@ -124,11 +124,10 @@ namespace CompositeAreaManager
 			DrawSubTreeLine (new Rect (inRect.xMin + centeringXOffset, inRect.yMin, inRect.width - centeringXOffset, LineHeight), prevHolderLocs, newHolderLocs);
 
 			int totalLinesUsed = 0;
-			List<float> nextSubTreeWidths = nextLineNodes.Select(n => n.MinSubTreeDisplayWidthNeeded()).ToList();
-			float nextSubTreeWidthsSum = nextSubTreeWidths.Sum ();
+			var subTreeWidths = PartitionWidthForSubtrees (inRect.width).ToList ();
 			Rect subTreeRect = new Rect (inRect.xMin, inRect.yMin + LineHeight, inRect.width, inRect.height - LineHeight);
 			for(int i = 0; i < nextLineNodes.Count; i++) {
-				subTreeRect.width = inRect.width * nextSubTreeWidths [i] / nextSubTreeWidthsSum;
+				subTreeRect.width = subTreeWidths [i];
 				int linesUsed = nextLineNodes[i].DrawSubTree(subTreeRect, newHolderLocs);
 				if (linesUsed > totalLinesUsed)
 					totalLinesUsed = linesUsed;
@@ -306,6 +305,38 @@ namespace CompositeAreaManager
 			} else if (parentArea.rootOp == op)
 				parentArea.rootOp = newOp;
 		}
+
+		public IEnumerable<float> PartitionWidthForSubtrees(float width)
+		{
+			float nextSubTreeWidthsSum = NextLineNodes.Sum (node => node.MinSubTreeDisplayWidthNeeded());
+			foreach(var subTreeTotalWidth in NextLineNodes.Select(node => node.MinSubTreeDisplayWidthNeeded()))
+				yield return width * subTreeTotalWidth / nextSubTreeWidthsSum;
+		}
+
+		public void ResetHoldingsForWidth(float width)
+		{
+			this.ResetToAllHeld ();
+
+			Action<CompositeAreaOp_DisplayNode, float> resetHoldingsRecur = null;
+			resetHoldingsRecur = (node, w) => {
+				var lineWidth = node.TotalWidthOnItsLine;
+				if(lineWidth > w) {
+					var adjustedNode = node.Children.Where(child => child.heldByParent).OrderByDescending(child => child.TotalWidthOnThisLine).FirstOrDefault();
+					if(adjustedNode == null)
+						return;
+					adjustedNode.heldByParent = false;
+					resetHoldingsRecur(node, w);
+				} else {
+					var subTreeWidths = node.PartitionWidthForSubtrees(w).ToList();
+					var subTrees = node.NextLineNodes.ToList();
+					for(int i = 0; i < subTrees.Count(); i++)
+						resetHoldingsRecur(subTrees[i], subTreeWidths[i]);
+				}
+			};
+
+			resetHoldingsRecur(this, width);
+		}
+	
 
 		public void ResetToAllHeld()
 		{

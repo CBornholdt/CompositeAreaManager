@@ -53,7 +53,7 @@ namespace CompositeAreaManager
 			Area area = compositeArea.area;
 
 			CompositeAreaOp_DisplayNode rootNode = CompositeAreaOp_DisplayNode.GenerateFromCompositeArea (compositeArea, this);
-			rootNode.ResetToAllHeld ();
+			rootNode.ResetHoldingsForWidth (inRect.width);
 			float usedHeight = (float)rootNode.DrawSubTree (rect) * LineHeight;
 			rect.yMin += usedHeight;
 			Widgets.Label (rect, area.Label);
@@ -94,6 +94,7 @@ namespace CompositeAreaManager
 						() => cAM.AllCompositeAreas.Remove (compositeArea)));
 				Find.WindowStack.Add (new FloatMenu (newAreaList));
 			}
+			listing.NewColumn ();
 			if (listing.ButtonText ("ManageAreas".Translate ()))
 				Find.WindowStack.Add (new Dialog_ManageAreas (map));
 

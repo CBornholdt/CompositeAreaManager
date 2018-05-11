@@ -11,5 +11,5 @@
 	<Area>Area</Area>
 	<AreaReference>Area Reference</AreaReference>
 	<RoomRole>Room Type</RoomRole>
-	<GrowingZone>Growing Zone</GrowingZone>
+	<AnyRoom>Any Room</AnyRoom>
 </LanguageData>
