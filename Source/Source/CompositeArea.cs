@@ -51,7 +51,7 @@ namespace CompositeAreaManager
 		{
 			if (!IsValid)
 				return;
-			Log.Message ("Rebuilding: " + area.Label);
+			//Log.Message ("Rebuilding: " + area.Label);
 			rootOp.Traverse (op => op.PreRecalculate ());
 			for(int cellIndex = 0; cellIndex < area.Map.cellIndices.NumGridCells; cellIndex++) 
 				area [cellIndex] = rootOp [cellIndex];

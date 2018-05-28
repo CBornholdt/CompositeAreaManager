@@ -82,7 +82,6 @@ namespace CompositeAreaManager
 			Widgets.EndScrollView ();
 			Rect footerRect = new Rect (inRectHolder);
 			footerRect.yMin = footerRect.yMax - footerHeight;
-			Log.Message (footerRect.ToString ());
 			listing.Begin (footerRect);
 			listing.ColumnWidth = footerRect.width / 2;
 			return inRectHolder;

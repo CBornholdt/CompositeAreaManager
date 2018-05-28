@@ -105,7 +105,6 @@ namespace CompositeAreaManager
 				listing.ButtonText("ManageWorkAreaPriorities".Translate())) {
 				MethodInfo getComponent = typeof(Map).GetMethod ("GetComponent", new Type[1]{ typeof(Type) });
 				Type wAPMType = Type.GetType ("WorkAreaPriorityManager.AreaPriorityManager, WorkAreaPriorityManager");
-				Log.Message ((wAPMType != null).ToString () + "   " + (getComponent != null).ToString ());
 				MethodInfo launchWAPMDialog = wAPMType.GetMethod ("LaunchDialog_ManageWorkAreaPriorities");
 				launchWAPMDialog.Invoke (getComponent.Invoke (map, new object[1]{ wAPMType }), new object[0]);
 				Close ();
