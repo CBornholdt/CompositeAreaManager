@@ -31,7 +31,7 @@ namespace CompositeAreaManager
 
 		public IEnumerable<Area> AllAreaReferences {
 			get {
-				return rootOp.AllAreaReferences;
+				return rootOp.AllAreaReferences.Concat(this.area);
 			}
 		}
 

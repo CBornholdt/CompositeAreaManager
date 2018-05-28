@@ -9,9 +9,9 @@ namespace CompositeAreaManager
 	{
 		static HarmonyPatches ()
 		{
-		//	HarmonyInstance.DEBUG = true;
+			HarmonyInstance.DEBUG = true;
 
-			HarmonyInstance harmony = HarmonyInstance.Create ("rimworld.compositeareamanager");
+			HarmonyInstance harmony = HarmonyInstance.Create ("cbornholdt.rimworld.compositeareamanager");
 
 			harmony.PatchAll (Assembly.GetExecutingAssembly ());
 		}

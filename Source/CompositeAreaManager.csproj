@@ -9,6 +9,7 @@
     <AssemblyName>CompositeAreaManager</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <BaseDirectory>Source</BaseDirectory>
+    <ReleaseVersion>0.2</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,7 +39,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\..\..\..\..\Projects\dotNet\Dll\0Harmony.dll</HintPath>
+      <HintPath>..\..\WorkAreaPriorityManager\Assemblies\0Harmony.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -59,5 +60,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Source\CompositeAreaOp\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Languages\English\Keyed\Dialog_ManageCompositeAreas.xml">
+      <Link>Languages\English\Keyed\Dialog_ManageCompositeAreas.xml</Link>
+    </None>
+    <None Include="..\About\About.xml">
+      <Link>About\About.xml</Link>
+    </None>
   </ItemGroup>
 </Project>
