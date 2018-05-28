@@ -22,6 +22,8 @@ namespace CompositeAreaManager
 			this.rootOp = new CompositeAreaOp_Empty ();
 		}
 
+		public CompositeArea() { }
+
 		public IEnumerable<Area> AllValidAdditionalAreaReferences {
 			get {
 				CompositeAreaManager cAM = area.Map.GetComponent<CompositeAreaManager> ();
