@@ -10,6 +10,8 @@ namespace CompositeAreaManager
 		public Map map = null;
 		Region[] regionGrid = null;
 
+		public CompositeAreaOp_RoomRoleType() { }
+
 		public CompositeAreaOp_RoomRoleType(Map map, RoomRoleDef roomRoleType)
 		{
 			this.roomRoleType = roomRoleType;

@@ -10,6 +10,8 @@ namespace CompositeAreaManager
 		public Map map = null;
 		Zone[] zoneGrid = null;
 
+		public CompositeAreaOp_GrowingZone() { }
+
 		public CompositeAreaOp_GrowingZone(Map map)
 		{
 			this.map = map;

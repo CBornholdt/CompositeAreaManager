@@ -56,6 +56,8 @@ namespace CompositeAreaManager
 
 	public class CompositeAreaOp_Empty : CompositeAreaOp
 	{
+		public CompositeAreaOp_Empty() { }
+
 		public override bool this [int cellIndex] { 
 			get { return false; }
 		}

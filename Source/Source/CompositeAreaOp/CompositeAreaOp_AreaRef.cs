@@ -9,6 +9,8 @@ namespace CompositeAreaManager
 	{
 		public Area areaRef = null;
 
+		public CompositeAreaOp_Area() { }
+
 		public override void ExposeData()
 		{
 			base.ExposeData ();
