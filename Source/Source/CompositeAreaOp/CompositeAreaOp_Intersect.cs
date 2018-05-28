@@ -4,8 +4,6 @@ namespace CompositeAreaManager
 {
 	public class CompositeAreaOp_Intersect : CompositeAreaOp
 	{
-		public CompositeAreaOp_Intersect() { }
-
 		public CompositeAreaOp_Intersect() {
 			arg1 = new CompositeAreaOp_Empty ();
 			arg2 = new CompositeAreaOp_Empty ();
