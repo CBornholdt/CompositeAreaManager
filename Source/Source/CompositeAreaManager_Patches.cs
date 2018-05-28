@@ -52,7 +52,6 @@ namespace CompositeAreaManager
 					yield return new CodeInstruction (OpCodes.Ldarg_0);	//Leave Listing_standard, Dialog_ManageAreas on stack
 					yield return new CodeInstruction (OpCodes.Call, buttonHelper);	//Consume 2
 					placedButton = true;
-					Log.Message ("htting");
 				}
 				yield return codes [i];
 			}
@@ -61,7 +60,6 @@ namespace CompositeAreaManager
 		static void ButtonHelper(Listing_Standard listing, Dialog_ManageAreas dialog) {
 			FieldInfo mapField = AccessTools.Field (typeof(Dialog_ManageAreas), "map");
 			Map map = (Map)mapField.GetValue(dialog);
-			Log.Message ("HITTING " + listing.CurHeight);
 			listing.NewColumn ();
 			if (listing.ButtonText ("ManageCompositeAreas".Translate (), null)) {
 				map.GetComponent<CompositeAreaManager> ().LaunchDialog_ManageCompositeAreas ();
