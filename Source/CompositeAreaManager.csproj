@@ -39,7 +39,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="0Harmony">
-      <HintPath>..\..\WorkAreaPriorityManager\Assemblies\0Harmony.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\..\..\usr\local\lib\dotnet\0Harmony.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
