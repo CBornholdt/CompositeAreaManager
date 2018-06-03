@@ -15,4 +15,5 @@
 	<Buildings>Buildings</Buildings>
 	<AnyCategoryBuildings>Any {0} Buildings</AnyCategoryBuildings>
 	<BuildingCategory>Building Category</BuildingCategory>
+	<Category>Category</Category>
 </LanguageData>

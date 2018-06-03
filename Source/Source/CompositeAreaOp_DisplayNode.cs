@@ -301,7 +301,7 @@ namespace CompositeAreaManager
 							, () => ReplaceOperationWith(new CompositeAreaOp_Building(designation, dialog.Map))));
 
 					foreach(var thingDef in buildingsInCat)
-						buildingOptions.Add(new FloatMenuOption(thingDef.label
+						buildingOptions.Add(new FloatMenuOption(thingDef.LabelCap
 							, () => ReplaceOperationWith(new CompositeAreaOp_Building(thingDef, dialog.Map))));
 					buildingDesignationOptions.Add(new FloatMenuOption
                         ("Category".Translate() + ": " + designation.LabelCap
