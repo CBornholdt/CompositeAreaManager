@@ -3,7 +3,7 @@
 	<name>Composite Area Manager</name>
 	<author>CBornholdt</author>
 	<targetVersion>0.18.0</targetVersion>
-	<description>V0.2
+	<description>V0.3
     Adds an additional area manager allowing composite areas to be configured and managed!
 	</description>
 </ModMetaData>

@@ -12,4 +12,7 @@
 	<AreaReference>Area Reference</AreaReference>
 	<RoomRole>Room Type</RoomRole>
 	<AnyRoom>Any Room</AnyRoom>
+	<Buildings>Buildings</Buildings>
+	<AnyCategoryBuildings>Any {0} Buildings</AnyCategoryBuildings>
+	<BuildingCategory>Building Category</BuildingCategory>
 </LanguageData>

@@ -57,6 +57,7 @@
     <Compile Include="Source\CompositeAreaOp\CompositeAreaOp_RoomRole.cs" />
     <Compile Include="Source\CompositeAreaOp\CompositeAreaOp_AreaRef.cs" />
     <Compile Include="Source\CompositeAreaOp\CompositeAreaOP_GrowingZone.cs" />
+    <Compile Include="Source\CompositeAreaOp\CompositeAreaOp_Building.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Source\CompositeAreaOp\" />

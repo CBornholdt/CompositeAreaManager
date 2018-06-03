@@ -192,16 +192,12 @@ namespace CompositeAreaManager
 					}));
 			};
 
-			if (op is CompositeAreaOp_RoomRoleType || op is CompositeAreaOp_GrowingZone) {
-				Widgets.Label (helper.rect, label);
-				highlightAndDrawRemoveElementAction ();
-				helper.rect.xMin += usedWidth;
-			}
 			if(op is CompositeAreaOp_Intersect || op is CompositeAreaOp_Union) {
 				Widgets.Label (helper.rect, label);
 				highlightAndDrawRemoveElementAction ();
 				helper.rect.xMin += usedWidth;
 				drawChild ();
+				return;
 			}
 			CompositeAreaOp_Area areaOp = op as CompositeAreaOp_Area;
 			if (areaOp != null) {
@@ -211,20 +207,27 @@ namespace CompositeAreaManager
 				GUI.color = currentColor;
 				highlightAndDrawRemoveElementAction ();
 				helper.rect.xMin += usedWidth;
+				return;
 			}
 			if (op is CompositeAreaOp_Invert) {
-				Widgets.Label (helper.rect, label.Substring (0, 3));
-				usedWidth = Text.CalcSize (label.Substring (0, 3)).x;
+				Widgets.Label (helper.rect, label.Substring (0, 5));
+				usedWidth = Text.CalcSize (label.Substring (0, 5)).x;
 				highlightAndDrawRemoveElementAction ();
 				helper.rect.xMin += usedWidth;
 				drawChild ();
-				Widgets.Label (helper.rect, label.Substring (3));
-				helper.rect.xMin += Text.CalcSize(label.Substring(3)).x + CellSpacing;
+				Widgets.Label (helper.rect, label.Substring (5));
+				helper.rect.xMin += Text.CalcSize(label.Substring(5)).x + CellSpacing;
+				return;
 			}
 			if (op is CompositeAreaOp_Empty) {
 				DrawOpButton (helper.rect);
 				helper.rect.xMin += usedWidth;
+				return;
 			}
+            
+            Widgets.Label (helper.rect, label);
+            highlightAndDrawRemoveElementAction ();
+            helper.rect.xMin += usedWidth;
 		}
 
 		public void DrawOpButton(Rect inRect)
@@ -285,6 +288,28 @@ namespace CompositeAreaManager
 
 			yield return new FloatMenuOption ("GrowingZone".Translate (), () => ReplaceOperationWith (
 				new CompositeAreaOp_GrowingZone (dialog.Map)));
+
+			List<FloatMenuOption> buildingDesignationOptions = new List<FloatMenuOption>();
+			foreach (var designation in DefDatabase<DesignationCategoryDef>.AllDefsListForReading) {
+				var buildingsInCat = DefDatabase<ThingDef>.AllDefs
+										.Where(def => def.category == ThingCategory.Building
+												&& def.designationCategory == designation);
+				if (buildingsInCat.Any()) {
+					List<FloatMenuOption> buildingOptions = new List<FloatMenuOption>();
+					if(buildingsInCat.Count() > 1)
+						buildingOptions.Add(new FloatMenuOption("AnyCategoryBuildings".Translate(designation.LabelCap)
+							, () => ReplaceOperationWith(new CompositeAreaOp_Building(designation, dialog.Map))));
+
+					foreach(var thingDef in buildingsInCat)
+						buildingOptions.Add(new FloatMenuOption(thingDef.label
+							, () => ReplaceOperationWith(new CompositeAreaOp_Building(thingDef, dialog.Map))));
+					buildingDesignationOptions.Add(new FloatMenuOption
+                        ("Category".Translate() + ": " + designation.LabelCap
+						, () => Find.WindowStack.Add(new FloatMenu(buildingOptions))));
+				}
+			}
+			yield return new FloatMenuOption("Buildings".Translate()
+								, () => Find.WindowStack.Add(new FloatMenu(buildingDesignationOptions)));
 		}
 
 		public float RawWidth()
@@ -341,8 +366,10 @@ namespace CompositeAreaManager
 		public void ResetToAllHeld()
 		{
 			foreach (var child in Children) {
-				child.heldByParent = !((child.op is CompositeAreaOp_Intersect || child.op is CompositeAreaOp_Union)
-					&& op.GetType() != child.op.GetType());
+				child.heldByParent = 
+                    !(op is CompositeAreaOp_Invert) //Invert Ops hold their children
+                    && !((child.op is CompositeAreaOp_Intersect || child.op is CompositeAreaOp_Union)
+					    && op.GetType() != child.op.GetType()); //Intersect and Unions not held unless same as parent
 				child.ResetToAllHeld ();
 			}
 		}

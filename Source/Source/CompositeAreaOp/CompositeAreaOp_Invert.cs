@@ -1,4 +1,5 @@
 ﻿using System;
+using Verse;
 
 namespace CompositeAreaManager
 {
@@ -20,7 +21,7 @@ namespace CompositeAreaManager
 			}
 		}
 		public override string Label {
-			get { return " !() "; }
+			get { return " " + "NOT".Translate() + "() "; }
 		}
 	}
 }
