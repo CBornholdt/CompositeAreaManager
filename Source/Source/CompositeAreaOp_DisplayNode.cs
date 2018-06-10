@@ -153,7 +153,7 @@ namespace CompositeAreaManager
 					else {
 						if(drawHolder) {
 							this.DrawHolderElement(helper);
-							newHolderLocs.Enqueue(helper.rect.min + new Vector2(HolderWidth() / 2, LineHeight / 2));
+							newHolderLocs.Enqueue(helper.rect.min + new Vector2(-HolderWidth() / 2, LineHeight / 2));
 						}
 						else
                             newHolderLocs.Enqueue (new Vector2(helper.rect.min.x, helper.rect.min.y + LineHeight / 2));
@@ -164,7 +164,7 @@ namespace CompositeAreaManager
 			drawOpRecur = operation => {
 				drawChild(operation.childBefore, this.ShouldDrawHolderElement);
 				if(!operation.heldByParent) //Can only happen for root op
-					Widgets.DrawLine(prevHolderLocs.Dequeue(),helper.rect.min + operation.HolderTargetAdjustment(), Color.green, 1);
+					Widgets.DrawLine(prevHolderLocs.Dequeue(),helper.rect.min + operation.HolderTargetAdjustment(), Color.green, 2);
 				operation.DrawElement(helper, prevHolderLocs, () => drawChild(operation.childAfter, this.ShouldDrawHolderElement)); 
 			};
 
@@ -192,7 +192,7 @@ namespace CompositeAreaManager
 				}
 				if (Widgets.ButtonInvisible (rect))
 					Find.WindowStack.Add (new FloatMenu (new List<FloatMenuOption> () { 
-						new FloatMenuOption ("Remove".Translate (), () => this.ReplaceOperationWith(new CompositeAreaOp_Empty()))
+						new FloatMenuOption ("CAM_Remove".Translate (), () => this.ReplaceOperationWith(new CompositeAreaOp_Empty()))
 					}));
 			};
 
@@ -214,13 +214,13 @@ namespace CompositeAreaManager
 				return;
 			}
 			if (op is CompositeAreaOp_Invert) {
-				Widgets.Label (helper.rect, label.Substring (0, 5));
-				usedWidth = Text.CalcSize (label.Substring (0, 5)).x;
+				Widgets.Label (helper.rect, label.Substring (0, 4));
+				usedWidth = Text.CalcSize (label.Substring (0, 4)).x;
 				highlightAndDrawRemoveElementAction ();
 				helper.rect.xMin += usedWidth;
 				drawChild ();
-				Widgets.Label (helper.rect, label.Substring (5));
-				helper.rect.xMin += Text.CalcSize(label.Substring(5)).x + CellSpacing;
+				Widgets.Label (helper.rect, label.Substring (4));
+				helper.rect.xMin += Text.CalcSize(label.Substring(4)).x + CellSpacing;
 				return;
 			}
 			if (op is CompositeAreaOp_Empty) {
@@ -267,30 +267,30 @@ namespace CompositeAreaManager
 
 		public IEnumerable<FloatMenuOption> MakeOpButtonMenuOptions()
 		{
-			yield return new FloatMenuOption ("Union".Translate (), () => ReplaceOperationWith (
+			yield return new FloatMenuOption ("CAM_Union".Translate (), () => ReplaceOperationWith (
 				new CompositeAreaOp_Union ()));
-			yield return new FloatMenuOption ("Intersect".Translate (), () => ReplaceOperationWith (
+			yield return new FloatMenuOption ("CAM_Intersect".Translate (), () => ReplaceOperationWith (
 				new CompositeAreaOp_Intersect ()));
-			yield return new FloatMenuOption ("Invert".Translate (), () => ReplaceOperationWith (
+			yield return new FloatMenuOption ("CAM_Invert".Translate (), () => ReplaceOperationWith (
 				new CompositeAreaOp_Invert ()));
 				
 			List<FloatMenuOption> mapReferenceList = new List<FloatMenuOption> ();
 			foreach (Area area in parentArea.AllValidAdditionalAreaReferences)
 				mapReferenceList.Add (new FloatMenuOption (area.Label, () => ReplaceOperationWith (
 					new CompositeAreaOp_Area () { areaRef = area })));
-			yield return new FloatMenuOption ("AreaReference".Translate (), () =>
+			yield return new FloatMenuOption ("CAM_AreaReference".Translate (), () =>
 				Find.WindowStack.Add (new FloatMenu (mapReferenceList)));
 
 			List<FloatMenuOption> roomRoleTypeList = new List<FloatMenuOption> ();
-			roomRoleTypeList.Add (new FloatMenuOption ("AnyRoom".Translate (), () => ReplaceOperationWith (
+			roomRoleTypeList.Add (new FloatMenuOption ("CAM_AnyRoom".Translate (), () => ReplaceOperationWith (
 				new CompositeAreaOp_AnyRoomType (dialog.Map))));
 			foreach (RoomRoleDef roomRole in DefDatabase<RoomRoleDef>.AllDefsListForReading)
 				roomRoleTypeList.Add (new FloatMenuOption (roomRole.LabelCap, 
 					() => ReplaceOperationWith (new CompositeAreaOp_RoomRoleType (dialog.Map, roomRole))));
-			yield return new FloatMenuOption ("RoomRole".Translate (), () =>
+			yield return new FloatMenuOption ("CAM_RoomRole".Translate (), () =>
 				Find.WindowStack.Add (new FloatMenu (roomRoleTypeList)));
 
-			yield return new FloatMenuOption ("GrowingZone".Translate (), () => ReplaceOperationWith (
+			yield return new FloatMenuOption ("CAM_GrowingZone".Translate (), () => ReplaceOperationWith (
 				new CompositeAreaOp_GrowingZone (dialog.Map)));
 
 			List<FloatMenuOption> buildingDesignationOptions = new List<FloatMenuOption>();
@@ -301,24 +301,24 @@ namespace CompositeAreaManager
 				if (buildingsInCat.Any()) {
 					List<FloatMenuOption> buildingOptions = new List<FloatMenuOption>();
 					if(buildingsInCat.Count() > 1)
-						buildingOptions.Add(new FloatMenuOption("AnyCategoryBuildings".Translate(designation.LabelCap)
+						buildingOptions.Add(new FloatMenuOption("CAM_AnyCategoryBuildings".Translate(designation.LabelCap)
 							, () => ReplaceOperationWith(new CompositeAreaOp_Building(designation, dialog.Map))));
 
 					foreach(var thingDef in buildingsInCat)
 						buildingOptions.Add(new FloatMenuOption(thingDef.LabelCap
 							, () => ReplaceOperationWith(new CompositeAreaOp_Building(thingDef, dialog.Map))));
 					buildingDesignationOptions.Add(new FloatMenuOption
-                        ("Category".Translate() + ": " + designation.LabelCap
+                        ("CAM_Category".Translate() + ": " + designation.LabelCap
 						, () => Find.WindowStack.Add(new FloatMenu(buildingOptions))));
 				}
 			}
-			yield return new FloatMenuOption("Buildings".Translate()
+			yield return new FloatMenuOption("CAM_Buildings".Translate()
 								, () => Find.WindowStack.Add(new FloatMenu(buildingDesignationOptions)));
 
-			yield return new FloatMenuOption("Plants".Translate()
+			yield return new FloatMenuOption("CAM_Plants".Translate()
 								, () => ReplaceOperationWith(new CompositeAreaOp_Plant(dialog.Map)));
                                                                 
-            yield return new FloatMenuOption("OnFire".Translate()
+            yield return new FloatMenuOption("CAM_OnFire".Translate()
                                 , () => ReplaceOperationWith(new CompositeAreaOp_OnFire(dialog.Map)));                                                                
 		}
 
@@ -376,10 +376,27 @@ namespace CompositeAreaManager
 		public void ResetToAllHeld()
 		{
 			foreach (var child in Children) {
-				child.heldByParent = 
+				switch(CAM_ModSettings.holdingStyle.Value) {
+				case HoldingStyle.Aggressively:
+					child.heldByParent = true;
+                    break;
+				case HoldingStyle.Smart:
+                    child.heldByParent = 
                     op is CompositeAreaOp_Invert //Invert Ops hold their children
                     || !((child.op is CompositeAreaOp_Intersect || child.op is CompositeAreaOp_Union)
-					    && op.GetType() != child.op.GetType()); //Intersect and Unions not held unless same as parent
+                        && op.GetType() != child.op.GetType()); //Intersect and Unions not held unless same as parent
+                    break;
+				case HoldingStyle.Normal:
+                    child.heldByParent = 
+                    op is CompositeAreaOp_Invert //Invert Ops hold their children
+                    || !((child.op is CompositeAreaOp_Intersect || child.op is CompositeAreaOp_Union)
+                        && op.GetType() != child.op.GetType()); //Intersect and Unions not held unless same as parent
+					break;
+				case HoldingStyle.Avoid:
+					child.heldByParent = !ShouldDrawHolderElement;
+					break;
+				}
+               
 				child.ResetToAllHeld ();
 			}
 		}

@@ -45,7 +45,11 @@ namespace CompositeAreaManager
 			}
 		}
 		public override string Label {
-			get { return "[" + roomRoleType.LabelCap + "]"; }
+			get {
+				if(CAM_ModSettings.displayDetailedOperationNames.Value)
+					return "[" + "CAM_RoomRole".Translate() + ": " + roomRoleType.LabelCap + "]";
+				return "[" + roomRoleType.LabelCap + "]";
+			}
 		}
 	}
 
@@ -82,7 +86,7 @@ namespace CompositeAreaManager
 			}
 		}
 		public override string Label {
-			get { return "[" + "AnyRoom".Translate() + "]"; }
+			get { return "[" + "CAM_AnyRoom".Translate() + "]"; }
 		}
 	}
 }

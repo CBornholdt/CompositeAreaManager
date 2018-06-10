@@ -1,4 +1,5 @@
 ﻿using System;
+using Verse;
 
 namespace CompositeAreaManager
 {
@@ -21,7 +22,7 @@ namespace CompositeAreaManager
 		}
 		public override string Label {
 			//get { return " \u222A "; }
-			get { return " OR "; }
+			get { return " " + "CAM_OR".Translate() + " "; }
 		}
 	}
 }

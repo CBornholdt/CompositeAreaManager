@@ -36,7 +36,10 @@ namespace CompositeAreaManager
 			}
 		}
 		public override string Label {
-			get { return areaRef.Label; }
+			get {
+				return CAM_ModSettings.displayDetailedOperationNames.Value
+						  ? areaRef.Label : areaRef.Label.TrimmedToLength(12);
+			}
 		}
 	}
 }

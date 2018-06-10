@@ -21,7 +21,7 @@ namespace CompositeAreaManager
 			}
 		}
 		public override string Label {
-			get { return " " + "NOT".Translate() + "() "; }
+			get { return "CAM_NOT".Translate() + "() "; }
 		}
 	}
 }

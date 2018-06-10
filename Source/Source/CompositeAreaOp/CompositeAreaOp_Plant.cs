@@ -35,7 +35,7 @@ namespace CompositeAreaManager
 		public override bool IsValid => true;
 
 		public override string Label {
-            get { return "[" + "Plants".Translate() + "]"; }
+            get { return "[" + "CAM_Plants".Translate() + "]"; }
         }
     }
 }

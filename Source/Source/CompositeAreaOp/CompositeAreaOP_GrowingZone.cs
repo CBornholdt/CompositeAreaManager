@@ -36,7 +36,7 @@ namespace CompositeAreaManager
 			}
 		}
 		public override string Label {
-			get { return "[" + "GrowingZone".Translate() + "]"; }
+			get { return "[" + "CAM_GrowingZone".Translate() + "]"; }
 		}
 	}
 }

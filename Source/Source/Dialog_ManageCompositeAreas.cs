@@ -81,17 +81,17 @@ namespace CompositeAreaManager
 
 			//Must have at least 1 non composite area ...
 			CompositeAreaManager cAM = map.GetComponent<CompositeAreaManager> ();
-			if (listing.ButtonText ("NewCompositeArea".Translate ()) && cAM.AllCompositeAreas.Count () < cAM.AllCompositableAreas.Count () - 1) {
+			if (listing.ButtonText ("CAM_NewCompositeArea".Translate ()) && cAM.AllCompositeAreas.Count () < cAM.AllCompositableAreas.Count () - 1) {
 				List<FloatMenuOption> newAreaList = new List<FloatMenuOption> ();
 				foreach (Area area in cAM.AllPotentialNewCompositeAreas)
-					newAreaList.Add (new FloatMenuOption ("Compose".Translate () + ": " + area.Label, 
+					newAreaList.Add (new FloatMenuOption ("CAM_Compose".Translate () + ": " + area.Label, 
 						() => cAM.AllCompositeAreas.Add (new CompositeArea (area))));
 				Find.WindowStack.Add (new FloatMenu (newAreaList));
 			}
-			if (listing.ButtonText ("RemoveCompositeArea".Translate ()) && cAM.AllCompositeAreas.Any()) {
+			if (listing.ButtonText ("CAM_RemoveCompositeArea".Translate ()) && cAM.AllCompositeAreas.Any()) {
 				List<FloatMenuOption> newAreaList = new List<FloatMenuOption> ();
 				foreach (var compositeArea in cAM.AllCompositeAreas)
-					newAreaList.Add (new FloatMenuOption ("Remove".Translate () + ": " + compositeArea.area.Label, 
+					newAreaList.Add (new FloatMenuOption ("CAM_Remove".Translate () + ": " + compositeArea.area.Label, 
 						() => cAM.AllCompositeAreas.Remove (compositeArea)));
 				Find.WindowStack.Add (new FloatMenu (newAreaList));
 			}
@@ -101,8 +101,8 @@ namespace CompositeAreaManager
 				Close();
 			}
 
-			if(LoadedModManager.RunningMods.Any(mod => mod.Name == "Work Area Priority Manager")
-				&& listing.ButtonText("ManageWorkAreaPriorities".Translate())) {
+			if(LoadedModManager.RunningMods.Any(mod => mod.Name.StartsWith("Work Area Priority Manager", StringComparison.Ordinal))
+				&& listing.ButtonText("CAM_ManageWorkAreaPriorities".Translate())) {
 				LaunchDialog_ManageWorkAreaPriorities();
 				Close();
 			}

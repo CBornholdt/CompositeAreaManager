@@ -12,7 +12,7 @@ namespace CompositeAreaManager
 {
 	[HarmonyPatch(typeof(RimWorld.Dialog_ManageAreas))]
 	[HarmonyPatch("DoWindowContents")]
-	[HarmonyBefore("cbornholdt.rimworld.workareaprioritymanager")]
+	[HarmonyBefore("rimworld.cbornholdt.workareaprioritymanager")]
 	static class Dialog_ManageAreas_DoWindowContents
 	{
 		private static Rect inRectHolder;
@@ -61,7 +61,7 @@ namespace CompositeAreaManager
 			FieldInfo mapField = AccessTools.Field (typeof(Dialog_ManageAreas), "map");
 			Map map = (Map)mapField.GetValue(dialog);
 			listing.NewColumn ();
-			if (listing.ButtonText ("ManageCompositeAreas".Translate (), null)) {
+			if (listing.ButtonText ("CAM_ManageCompositeAreas".Translate (), null)) {
 				map.GetComponent<CompositeAreaManager> ().LaunchDialog_ManageCompositeAreas ();
 				dialog.Close (false);
 			}
@@ -94,6 +94,7 @@ namespace CompositeAreaManager
 	{
 		static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
+			Log.Message("Patching!!");
 			MethodInfo getWindowStack = AccessTools.Method (typeof(Verse.Find), "get_WindowStack");
 			MethodInfo listAddHelper = AccessTools.Method (typeof(AreaUtility_MakeAllowedAreaListFloatMenu), "ListAddHelper");
 
@@ -110,7 +111,7 @@ namespace CompositeAreaManager
 
 		static void ListAddHelper(Map map, List<FloatMenuOption> list)
 		{
-			list.Add (new FloatMenuOption ("ManageCompositeAreas".Translate (), 
+			list.Add (new FloatMenuOption ("CAM_ManageCompositeAreas".Translate (), 
 				() => map.GetComponent<CompositeAreaManager> ().LaunchDialog_ManageCompositeAreas (), 
 				MenuOptionPriority.Low, null, null, 0, null, null));
 		}

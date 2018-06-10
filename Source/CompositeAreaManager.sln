@@ -32,5 +32,18 @@ Global
 		$2.NewLineForClausesInQuery = False
 		$2.SpaceAfterControlFlowStatementKeyword = False
 		$2.scope = text/x-csharp
+		$2.IndentSwitchSection = False
+		$0.DotNetNamingPolicy = $3
+		$0.TextStylePolicy = $4
+		$4.FileWidth = 80
+		$4.TabsToSpaces = True
+		$4.scope = text/plain
+		$0.TextStylePolicy = $5
+		$5.inheritsSet = null
+		$5.scope = application/xml
+		$0.XmlFormattingPolicy = $6
+		$6.scope = application/xml
+		$0.StandardHeader = $7
+		$0.VersionControlPolicy = $8
 	EndGlobalSection
 EndGlobal

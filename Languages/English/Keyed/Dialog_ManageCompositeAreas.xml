@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-	<ManageCompositeAreas>Manage Composite Areas</ManageCompositeAreas>
-	<Compose>Compose</Compose>
-	<NewCompositeArea>New Composite Area</NewCompositeArea>
-	<RemoveCompositeArea>Remove Composite Area</RemoveCompositeArea>
-	<Union>Union</Union>
-	<Intersect>Intersect</Intersect>
-	<Invert>Invert</Invert>
-	<Remove>Remove</Remove>
-	<Area>Area</Area>
-	<AreaReference>Area Reference</AreaReference>
-	<RoomRole>Room Type</RoomRole>
-	<AnyRoom>Any Room</AnyRoom>
-	<Buildings>Buildings</Buildings>
-	<AnyCategoryBuildings>Any {0} Buildings</AnyCategoryBuildings>
-	<BuildingCategory>Building Category</BuildingCategory>
-	<Category>Category</Category>
-    <Plants>Plants</Plants>
-    <OnFire>On Fire</OnFire>
+	<CAM_ManageCompositeAreas>Manage Composite Areas</CAM_ManageCompositeAreas>
+	<CAM_Compose>Compose</CAM_Compose>
+	<CAM_NewCompositeArea>New Composite Area</CAM_NewCompositeArea>
+	<CAM_RemoveCompositeArea>Remove Composite Area</CAM_RemoveCompositeArea>
+	<CAM_Union>Union</CAM_Union>
+	<CAM_Intersect>Intersect</CAM_Intersect>
+	<CAM_Invert>Invert</CAM_Invert>
+	<CAM_Remove>Remove</CAM_Remove>
+	<CAM_Area>Area</CAM_Area>
+    <CAM_OR>OR</CAM_OR>
+    <CAM_AND>AND</CAM_AND>
+    <CAM_NOT>NOT</CAM_NOT>
+	<CAM_AreaReference>Area Reference</CAM_AreaReference>
+	<CAM_RoomRole>Room Type</CAM_RoomRole>
+	<CAM_AnyRoom>Any Room</CAM_AnyRoom>
+    <CAM_GrowingZone>Growing Zone</CAM_GrowingZone>
+	<CAM_Buildings>Buildings</CAM_Buildings>
+	<CAM_AnyCategoryBuildings>Any {0} Buildings</CAM_AnyCategoryBuildings>
+	<CAM_BuildingCategory>Building Category</CAM_BuildingCategory>
+	<CAM_Category>Category</CAM_Category>
+    <CAM_Plants>Plants</CAM_Plants>
+    <CAM_OnFire>On Fire</CAM_OnFire>
+    <CAM_HoldingStyle.Label>Holding Style</CAM_HoldingStyle.Label>
+    <CAM_HoldingStyle.Desc>How the Composite Area Dialog will display more complex composite operations.\nAggressively: Will attempt to fit as much onto a line as possible\nSmart: Makes educated guesses for a clean appearance\nNormal: Different binary options are not held\nAvoid: Will avoid in nearly all cases</CAM_HoldingStyle.Desc>
+    <CAM_HoldingStyle_Aggressively>Aggressively</CAM_HoldingStyle_Aggressively>
+    <CAM_HoldingStyle_Smart>Smart</CAM_HoldingStyle_Smart>
+    <CAM_HoldingStyle_Normal>Normal</CAM_HoldingStyle_Normal>
+    <CAM_HoldingStyle_Avoid>Avoid</CAM_HoldingStyle_Avoid>
+    <CAM_DisplayDetailedOperationNames.Label>Detailed Operation Names</CAM_DisplayDetailedOperationNames.Label>
+    <CAM_DisplayDetailedOperationNames.Desc>Whether individual operations composing an area should be displayed with more detailed names.</CAM_DisplayDetailedOperationNames.Desc>
 </LanguageData>

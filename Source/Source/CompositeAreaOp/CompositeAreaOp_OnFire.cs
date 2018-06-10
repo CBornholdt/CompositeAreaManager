@@ -34,7 +34,7 @@ namespace CompositeAreaManager
 		public override bool IsValid => true;
            
         public override string Label {
-            get { return "[" + "OnFire".Translate() + "]"; }
+            get { return "[" + "CAM_OnFire".Translate() + "]"; }
         }
     }
 }

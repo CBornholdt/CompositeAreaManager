@@ -40,9 +40,14 @@
     </Reference>
     <Reference Include="0Harmony">
       <HintPath>..\..\..\..\..\..\..\..\..\..\usr\local\lib\dotnet\0Harmony.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="WorkAreaPriorityManager">
       <HintPath>..\..\WorkAreaPriorityManager\Assemblies\WorkAreaPriorityManager.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="HugsLib">
+      <HintPath>..\..\HugsLib\Assemblies\HugsLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -64,6 +69,7 @@
     <Compile Include="Source\CompositeAreaOp\CompositeAreaOp_Building.cs" />
     <Compile Include="Source\CompositeAreaOp\CompositeAreaOp_Plant.cs" />
     <Compile Include="Source\CompositeAreaOp\CompositeAreaOp_OnFire.cs" />
+    <Compile Include="Source\CAM_ModSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Source\CompositeAreaOp\" />
