@@ -146,22 +146,26 @@ namespace CompositeAreaManager
 			RectHelper helper = new RectHelper(){ rect = new Rect (inRect) };	//should be called workingRectHelper but mah fingers
 
 			Action<CompositeAreaOp_DisplayNode> drawOpRecur = null;
-			Action<CompositeAreaOp_DisplayNode> drawChild = child => {
+			Action<CompositeAreaOp_DisplayNode, bool> drawChild = (child, drawHolder) => {
 				if (child != null) {
 					if (child.heldByParent)
 						drawOpRecur (child);
 					else {
-						newHolderLocs.Enqueue (helper.rect.min + new Vector2 (HolderWidth () / 2, LineHeight / 2));
-						this.DrawHolderElement(helper);
+						if(drawHolder) {
+							this.DrawHolderElement(helper);
+							newHolderLocs.Enqueue(helper.rect.min + new Vector2(HolderWidth() / 2, LineHeight / 2));
+						}
+						else
+                            newHolderLocs.Enqueue (new Vector2(helper.rect.min.x, helper.rect.min.y + LineHeight / 2));
 					}
 				}
 			};
 
 			drawOpRecur = operation => {
-				drawChild(operation.childBefore);
+				drawChild(operation.childBefore, this.ShouldDrawHolderElement);
 				if(!operation.heldByParent) //Can only happen for root op
 					Widgets.DrawLine(prevHolderLocs.Dequeue(),helper.rect.min + operation.HolderTargetAdjustment(), Color.green, 1);
-				operation.DrawElement(helper, prevHolderLocs, () => drawChild(operation.childAfter)); 
+				operation.DrawElement(helper, prevHolderLocs, () => drawChild(operation.childAfter, this.ShouldDrawHolderElement)); 
 			};
 
 			drawOpRecur (this);
@@ -310,6 +314,12 @@ namespace CompositeAreaManager
 			}
 			yield return new FloatMenuOption("Buildings".Translate()
 								, () => Find.WindowStack.Add(new FloatMenu(buildingDesignationOptions)));
+
+			yield return new FloatMenuOption("Plants".Translate()
+								, () => ReplaceOperationWith(new CompositeAreaOp_Plant(dialog.Map)));
+                                                                
+            yield return new FloatMenuOption("OnFire".Translate()
+                                , () => ReplaceOperationWith(new CompositeAreaOp_OnFire(dialog.Map)));                                                                
 		}
 
 		public float RawWidth()
@@ -367,8 +377,8 @@ namespace CompositeAreaManager
 		{
 			foreach (var child in Children) {
 				child.heldByParent = 
-                    !(op is CompositeAreaOp_Invert) //Invert Ops hold their children
-                    && !((child.op is CompositeAreaOp_Intersect || child.op is CompositeAreaOp_Union)
+                    op is CompositeAreaOp_Invert //Invert Ops hold their children
+                    || !((child.op is CompositeAreaOp_Intersect || child.op is CompositeAreaOp_Union)
 					    && op.GetType() != child.op.GetType()); //Intersect and Unions not held unless same as parent
 				child.ResetToAllHeld ();
 			}

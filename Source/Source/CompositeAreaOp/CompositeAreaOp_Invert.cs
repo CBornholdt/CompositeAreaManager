@@ -5,7 +5,7 @@ namespace CompositeAreaManager
 {
 	public class CompositeAreaOp_Invert : CompositeAreaOp
 	{
-		public CompositeAreaOp_Invert()
+		public CompositeAreaOp_Invert() : base(null)
 		{
 			arg1 = new CompositeAreaOp_Empty();
 		}

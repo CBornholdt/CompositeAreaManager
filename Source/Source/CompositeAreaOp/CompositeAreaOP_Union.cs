@@ -4,7 +4,8 @@ namespace CompositeAreaManager
 {
 	public class CompositeAreaOp_Union : CompositeAreaOp
 	{
-		public CompositeAreaOp_Union() {
+		public CompositeAreaOp_Union() : base(null) 
+        {
 			arg1 = new CompositeAreaOp_Empty ();
 			arg2 = new CompositeAreaOp_Empty ();
 		}

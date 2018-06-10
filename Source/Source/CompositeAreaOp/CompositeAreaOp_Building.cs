@@ -10,20 +10,17 @@ namespace CompositeAreaManager
     {
 		public ThingDef building = null;
 		public DesignationCategoryDef buildingCategory = null;
-		public Map map = null;
 
-        public CompositeAreaOp_Building() : base() { }
+        public CompositeAreaOp_Building() : base(null) { }
 
-		public CompositeAreaOp_Building(ThingDef building, Map map) : base()
+		public CompositeAreaOp_Building(ThingDef building, Map map) : base(map)
 		{
 			this.building = building;
-			this.map = map;
 		}
 
-		public CompositeAreaOp_Building(DesignationCategoryDef category,Map map)
+		public CompositeAreaOp_Building(DesignationCategoryDef category, Map map) : base(map)
 		{
 			this.buildingCategory = category;
-			this.map = map;
 		}
 
         public override void ExposeData()
@@ -31,7 +28,6 @@ namespace CompositeAreaManager
             base.ExposeData ();
 			Scribe_Defs.Look<ThingDef>(ref this.building,"Building");
 			Scribe_Defs.Look<DesignationCategoryDef>(ref this.buildingCategory,"BuildingCategory");
-			Scribe_References.Look<Map>(ref this.map,"Map");
         }
 
         public override bool this [int cellIndex] { 

@@ -7,12 +7,11 @@ namespace CompositeAreaManager
 	public class CompositeAreaOp_RoomRoleType : CompositeAreaOp
 	{
 		public RoomRoleDef roomRoleType = null;
-		public Map map = null;
 		Region[] regionGrid = null;
 
-		public CompositeAreaOp_RoomRoleType() { }
+		public CompositeAreaOp_RoomRoleType() : base(null) { }
 
-		public CompositeAreaOp_RoomRoleType(Map map, RoomRoleDef roomRoleType)
+		public CompositeAreaOp_RoomRoleType(Map map, RoomRoleDef roomRoleType) : base(map)
 		{
 			this.roomRoleType = roomRoleType;
 			this.map = map;
@@ -22,7 +21,6 @@ namespace CompositeAreaManager
 		{
 			base.ExposeData ();
 			Scribe_Defs.Look<RoomRoleDef> (ref this.roomRoleType, "RoomRoleType");
-			Scribe_References.Look<Map> (ref this.map, "Map");
 		}
 
 		public override void PreRecalculate()
@@ -53,14 +51,10 @@ namespace CompositeAreaManager
 
 	public class CompositeAreaOp_AnyRoomType : CompositeAreaOp
 	{
-		public Map map = null;
 		Region[] regionGrid = null;
 
-		public CompositeAreaOp_AnyRoomType(Map map)
-		{
-			this.map = map;
-		}
-
+		public CompositeAreaOp_AnyRoomType(Map map = null) : base(map) { }
+	
 		public override void ExposeData()
 		{
 			base.ExposeData ();

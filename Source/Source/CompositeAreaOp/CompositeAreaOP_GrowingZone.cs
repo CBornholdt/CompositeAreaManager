@@ -7,15 +7,11 @@ namespace CompositeAreaManager
 {
 	public class CompositeAreaOp_GrowingZone : CompositeAreaOp
 	{
-		public Map map = null;
 		Zone[] zoneGrid = null;
 
-		public CompositeAreaOp_GrowingZone() { }
+		public CompositeAreaOp_GrowingZone() : base(null) { }
 
-		public CompositeAreaOp_GrowingZone(Map map)
-		{
-			this.map = map;
-		}
+		public CompositeAreaOp_GrowingZone(Map map) : base(map) { }
 
 		public override void PreRecalculate()
 		{
@@ -26,12 +22,6 @@ namespace CompositeAreaManager
 		public override void PostRecalculate()
 		{
 			this.zoneGrid = null;
-		}
-
-		public override void ExposeData()
-		{
-			base.ExposeData ();
-			Scribe_References.Look<Map> (ref this.map, "Map");
 		}
 
 		public override bool this [int cellIndex] { 

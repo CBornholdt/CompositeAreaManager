@@ -50,7 +50,7 @@ namespace CompositeAreaManager
 
 		private float DoCompositeAreaRowElement(CompositeArea compositeArea, Rect inRect)
 		{
-			Rect rect = inRect.ContractedBy (CellSpacing);	//Used height adjusted in return
+			Rect rect = inRect.ContractedBy (2 * CellSpacing);	//Used height adjusted in return
 			Area area = compositeArea.area;
 
 			CompositeAreaOp_DisplayNode rootNode = CompositeAreaOp_DisplayNode.GenerateFromCompositeArea (compositeArea, this);
@@ -70,7 +70,7 @@ namespace CompositeAreaManager
 				GUI.color = Color.white;
 			}
 
-			return usedHeight + 2 * CellSpacing;
+			return usedHeight + 4 * CellSpacing;
 		}
 
 		private void DoFooterContents(Rect inRect)
@@ -96,20 +96,17 @@ namespace CompositeAreaManager
 				Find.WindowStack.Add (new FloatMenu (newAreaList));
 			}
 			listing.NewColumn ();
-			if (listing.ButtonText ("ManageAreas".Translate ())) {
-				Find.WindowStack.Add (new Dialog_ManageAreas (map));
-				Close ();
+			if(listing.ButtonText("ManageAreas".Translate())) {
+				Find.WindowStack.Add(new Dialog_ManageAreas(map));
+				Close();
 			}
 
-			if (LoadedModManager.RunningMods.Any (mod => mod.Name == "Work Area Priority Manager") &&
-				listing.ButtonText("ManageWorkAreaPriorities".Translate())) {
-				MethodInfo getComponent = typeof(Map).GetMethod ("GetComponent", new Type[1]{ typeof(Type) });
-				Type wAPMType = Type.GetType ("WorkAreaPriorityManager.AreaPriorityManager, WorkAreaPriorityManager");
-				MethodInfo launchWAPMDialog = wAPMType.GetMethod ("LaunchDialog_ManageWorkAreaPriorities");
-				launchWAPMDialog.Invoke (getComponent.Invoke (map, new object[1]{ wAPMType }), new object[0]);
-				Close ();
+			if(LoadedModManager.RunningMods.Any(mod => mod.Name == "Work Area Priority Manager")
+				&& listing.ButtonText("ManageWorkAreaPriorities".Translate())) {
+				LaunchDialog_ManageWorkAreaPriorities();
+				Close();
 			}
-
+          
 			listing.End ();
 		}
 
@@ -132,6 +129,11 @@ namespace CompositeAreaManager
 			footerRect.yMin = footerRect.yMax - this.footerHeight;
 			this.DoFooterContents (footerRect);
 		}
+
+        private void LaunchDialog_ManageWorkAreaPriorities()
+        {
+            map.GetComponent<WorkAreaPriorityManager.AreaPriorityManager>().LaunchDialog_ManageWorkAreaPriorities();
+        }
 
 		public override void PreClose()
 		{

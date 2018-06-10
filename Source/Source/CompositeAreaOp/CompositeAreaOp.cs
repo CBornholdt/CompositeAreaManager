@@ -8,6 +8,7 @@ namespace CompositeAreaManager
 	{
 		public CompositeAreaOp arg1 = null;
 		public CompositeAreaOp arg2 = null;
+		public Map map = null;
 
 		public abstract bool this [int cellIndex] { get; }
 
@@ -20,6 +21,11 @@ namespace CompositeAreaManager
 					foreach (var area in arg2.AllAreaReferences)
 						yield return area;
 			}
+		}
+
+		protected CompositeAreaOp(Map map)
+		{
+			this.map = map;
 		}
 
 		IEnumerable<CompositeAreaOp> Children {
@@ -37,6 +43,7 @@ namespace CompositeAreaManager
 		{
 			Scribe_Deep.Look<CompositeAreaOp> (ref this.arg1, "Arg1");
 			Scribe_Deep.Look<CompositeAreaOp> (ref this.arg2, "Arg2");
+			Scribe_References.Look<Map>(ref this.map, "Map");
 		}
 
 		public void Traverse(Action<CompositeAreaOp> action)
@@ -56,7 +63,7 @@ namespace CompositeAreaManager
 
 	public class CompositeAreaOp_Empty : CompositeAreaOp
 	{
-		public CompositeAreaOp_Empty() { }
+		public CompositeAreaOp_Empty() : base(null) { }
 
 		public override bool this [int cellIndex] { 
 			get { return false; }
