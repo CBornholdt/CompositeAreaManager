@@ -22,12 +22,13 @@
 	<CAM_Category>Category</CAM_Category>
     <CAM_Plants>Plants</CAM_Plants>
     <CAM_OnFire>On Fire</CAM_OnFire>
+    <CompositeAreaManager.Settings.CategoryLabel>Composite Area Manager</CompositeAreaManager.Settings.CategoryLabel>
     <CAM_HoldingStyle.Label>Holding Style</CAM_HoldingStyle.Label>
     <CAM_HoldingStyle.Desc>How the Composite Area Dialog will display more complex composite operations.\nAggressively: Will attempt to fit as much onto a line as possible\nSmart: Makes educated guesses for a clean appearance\nNormal: Different binary options are not held\nAvoid: Will avoid in nearly all cases</CAM_HoldingStyle.Desc>
     <CAM_HoldingStyle_Aggressively>Aggressively</CAM_HoldingStyle_Aggressively>
     <CAM_HoldingStyle_Smart>Smart</CAM_HoldingStyle_Smart>
     <CAM_HoldingStyle_Normal>Normal</CAM_HoldingStyle_Normal>
     <CAM_HoldingStyle_Avoid>Avoid</CAM_HoldingStyle_Avoid>
-    <CAM_DisplayDetailedOperationNames.Label>Detailed Operation Names</CAM_DisplayDetailedOperationNames.Label>
-    <CAM_DisplayDetailedOperationNames.Desc>Whether individual operations composing an area should be displayed with more detailed names.</CAM_DisplayDetailedOperationNames.Desc>
+    <CAM_DetailedOpNames.Label>Detailed Operation Names</CAM_DetailedOpNames.Label>
+    <CAM_DetailedOpNames.Desc>Whether individual operations composing an area should be displayed with more detailed names.</CAM_DetailedOpNames.Desc>
 </LanguageData>

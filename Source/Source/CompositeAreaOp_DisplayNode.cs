@@ -376,7 +376,7 @@ namespace CompositeAreaManager
 		public void ResetToAllHeld()
 		{
 			foreach (var child in Children) {
-				switch(CAM_ModSettings.holdingStyle.Value) {
+				switch(CAM_Mod.settings.holdingStyle) {
 				case HoldingStyle.Aggressively:
 					child.heldByParent = true;
                     break;

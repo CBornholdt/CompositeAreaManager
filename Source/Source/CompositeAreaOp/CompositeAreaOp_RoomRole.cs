@@ -46,7 +46,7 @@ namespace CompositeAreaManager
 		}
 		public override string Label {
 			get {
-				if(CAM_ModSettings.displayDetailedOperationNames.Value)
+				if(CAM_Mod.settings.displayDetailedOpNames)
 					return "[" + "CAM_RoomRole".Translate() + ": " + roomRoleType.LabelCap + "]";
 				return "[" + roomRoleType.LabelCap + "]";
 			}

@@ -46,10 +46,6 @@
       <HintPath>..\..\WorkAreaPriorityManager\Assemblies\WorkAreaPriorityManager.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="HugsLib">
-      <HintPath>..\..\HugsLib\Assemblies\HugsLib.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -70,9 +66,11 @@
     <Compile Include="Source\CompositeAreaOp\CompositeAreaOp_Plant.cs" />
     <Compile Include="Source\CompositeAreaOp\CompositeAreaOp_OnFire.cs" />
     <Compile Include="Source\CAM_ModSettings.cs" />
+    <Compile Include="Source\Extensions\Listing_Standard_Ext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Source\CompositeAreaOp\" />
+    <Folder Include="Source\Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Languages\English\Keyed\Dialog_ManageCompositeAreas.xml">

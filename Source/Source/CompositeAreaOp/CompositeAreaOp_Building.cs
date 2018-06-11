@@ -47,7 +47,7 @@ namespace CompositeAreaManager
         
         public override string Label {
             get {
-				if(CAM_ModSettings.displayDetailedOperationNames.Value) {
+				if(CAM_Mod.settings.displayDetailedOpNames) {
 					if(building != null)
 						return "[" + "CAM_Building".Translate() + ": " + building.LabelCap + "]";
 					return "[" + "CAM_BuildingCategory".Translate() + ": " + buildingCategory.LabelCap + "]";
